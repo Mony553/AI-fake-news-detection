@@ -1,5 +1,4 @@
 import importlib
-from html import escape
 
 import streamlit as st
 
@@ -4037,6 +4036,40 @@ def _load_theme() -> None:
             white-space: nowrap !important;
         }
 
+        section[data-testid="stSidebar"] div[data-testid="stButton"] {
+            margin: 0 0 0.38rem !important;
+        }
+
+        section[data-testid="stSidebar"] div[data-testid="stButton"] button {
+            justify-content: flex-start !important;
+            min-height: 3.25rem !important;
+            width: 100% !important;
+            padding: 0.62rem 0.95rem !important;
+            border-radius: 10px !important;
+            border: 1px solid transparent !important;
+            background: transparent !important;
+            color: #273142 !important;
+            box-shadow: none !important;
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+            font-size: 0.98rem !important;
+            font-weight: 780 !important;
+            line-height: 1.2 !important;
+            text-align: left !important;
+        }
+
+        section[data-testid="stSidebar"] div[data-testid="stButton"] button:hover {
+            background: #FFFFFF !important;
+            border-color: #DCE4F0 !important;
+            color: #273142 !important;
+        }
+
+        section[data-testid="stSidebar"] div[data-testid="stButton"] button[kind="primary"] {
+            background: #0B57D0 !important;
+            border-color: #0B57D0 !important;
+            color: #FFFFFF !important;
+            box-shadow: 0 10px 20px rgba(11, 87, 208, 0.18) !important;
+        }
+
         section[data-testid="stSidebar"] div[role="radiogroup"] {
             display: grid !important;
             gap: 0.38rem !important;
@@ -5443,28 +5476,28 @@ def _render_sidebar() -> str:
     if st.session_state.get("nav_page_selected") not in pages:
         st.session_state["nav_page_selected"] = pages[0]
     selected = st.session_state["nav_page_selected"]
-    main_links = []
-    report_links = []
-    for page in pages:
-        link = (
-            f'<a class="custom-nav-link {"active" if page == selected else ""}" href="?nav={page}" target="_self">'
-            f'<span class="custom-nav-icon">{escape(page_icons[page])}</span>'
-            f'<span class="custom-nav-label">{escape(page_labels.get(page, page))}</span>'
-            "</a>"
+
+    def render_nav_button(page: str) -> None:
+        label = f"{page_icons[page]}  {page_labels.get(page, page)}"
+        clicked = st.sidebar.button(
+            label,
+            key=f"nav_btn_{page}",
+            type="primary" if page == selected else "secondary",
+            use_container_width=True,
         )
-        if page in {"Performance", "Data", "History", "Settings"}:
-            report_links.append(link)
-        else:
-            main_links.append(link)
-    st.sidebar.markdown(
-        f"""
-        <div class="sidebar-group-label">MAIN</div>
-        <nav class="custom-nav-menu">{"".join(main_links)}</nav>
-        <div class="sidebar-group-label">REPORTS</div>
-        <nav class="custom-nav-menu">{"".join(report_links)}</nav>
-        """,
-        unsafe_allow_html=True,
-    )
+        if clicked:
+            st.session_state["nav_page_selected"] = page
+            st.rerun()
+
+    st.sidebar.markdown('<div class="sidebar-group-label">MAIN</div>', unsafe_allow_html=True)
+    for page in ["Home", "Article", "Image", "Link", "Batch"]:
+        render_nav_button(page)
+
+    st.sidebar.markdown('<div class="sidebar-group-label">REPORTS</div>', unsafe_allow_html=True)
+    for page in ["Performance", "Data", "History", "Settings"]:
+        render_nav_button(page)
+
+    selected = st.session_state["nav_page_selected"]
     status = business_status_label(model_status())
     st.sidebar.markdown(
         f"""
