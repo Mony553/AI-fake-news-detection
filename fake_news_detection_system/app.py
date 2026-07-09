@@ -1,4 +1,5 @@
 import importlib
+from html import escape
 
 import streamlit as st
 
@@ -3977,6 +3978,65 @@ def _load_theme() -> None:
             text-transform: uppercase !important;
         }
 
+        .custom-nav-menu {
+            display: grid !important;
+            gap: 0.38rem !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        .custom-nav-link {
+            display: grid !important;
+            grid-template-columns: 2.65rem minmax(0, 1fr) !important;
+            align-items: center !important;
+            min-height: 3.25rem !important;
+            width: 100% !important;
+            margin: 0 !important;
+            padding: 0.62rem 0.95rem !important;
+            border: 1px solid transparent !important;
+            border-radius: 10px !important;
+            background: transparent !important;
+            color: #273142 !important;
+            text-decoration: none !important;
+            box-shadow: none !important;
+            cursor: pointer !important;
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+            font-size: 0.98rem !important;
+            font-weight: 780 !important;
+            line-height: 1.2 !important;
+        }
+
+        .custom-nav-link:hover {
+            background: #FFFFFF !important;
+            border-color: #DCE4F0 !important;
+            color: #273142 !important;
+            text-decoration: none !important;
+        }
+
+        .custom-nav-link.active {
+            background: #0B57D0 !important;
+            border-color: #0B57D0 !important;
+            color: #FFFFFF !important;
+            box-shadow: 0 10px 20px rgba(11, 87, 208, 0.18) !important;
+        }
+
+        .custom-nav-icon {
+            display: grid !important;
+            place-items: center !important;
+            width: 2.35rem !important;
+            height: 2.35rem !important;
+            color: currentColor !important;
+            font-size: 1.22rem !important;
+            line-height: 1 !important;
+        }
+
+        .custom-nav-label {
+            min-width: 0 !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+            white-space: nowrap !important;
+        }
+
         section[data-testid="stSidebar"] div[role="radiogroup"] {
             display: grid !important;
             gap: 0.38rem !important;
@@ -5347,7 +5407,6 @@ def _render_sidebar() -> str:
         """,
         unsafe_allow_html=True,
     )
-    st.sidebar.markdown('<div class="sidebar-group-label">MAIN</div>', unsafe_allow_html=True)
     pages = [
         "Home",
         "Article",
@@ -5370,17 +5429,42 @@ def _render_sidebar() -> str:
         "History": "Review Records",
         "Settings": "Workspace Settings",
     }
+    page_icons = {
+        "Home": "⌂",
+        "Article": "▤",
+        "Image": "▧",
+        "Link": "↗",
+        "Batch": "□",
+        "Performance": "⌁",
+        "Data": "◎",
+        "History": "◷",
+        "Settings": "⚙",
+    }
     if st.session_state.get("nav_page_selected") not in pages:
         st.session_state["nav_page_selected"] = pages[0]
-    selected = st.sidebar.radio(
-        "Navigation",
-        pages,
-        key="nav_page_radio",
-        index=pages.index(st.session_state["nav_page_selected"]),
-        format_func=lambda page: page_labels.get(page, page),
-        label_visibility="collapsed",
+    selected = st.session_state["nav_page_selected"]
+    main_links = []
+    report_links = []
+    for page in pages:
+        link = (
+            f'<a class="custom-nav-link {"active" if page == selected else ""}" href="?nav={page}" target="_self">'
+            f'<span class="custom-nav-icon">{escape(page_icons[page])}</span>'
+            f'<span class="custom-nav-label">{escape(page_labels.get(page, page))}</span>'
+            "</a>"
+        )
+        if page in {"Performance", "Data", "History", "Settings"}:
+            report_links.append(link)
+        else:
+            main_links.append(link)
+    st.sidebar.markdown(
+        f"""
+        <div class="sidebar-group-label">MAIN</div>
+        <nav class="custom-nav-menu">{"".join(main_links)}</nav>
+        <div class="sidebar-group-label">REPORTS</div>
+        <nav class="custom-nav-menu">{"".join(report_links)}</nav>
+        """,
+        unsafe_allow_html=True,
     )
-    st.session_state["nav_page_selected"] = selected
     status = business_status_label(model_status())
     st.sidebar.markdown(
         f"""
@@ -5445,10 +5529,8 @@ def main() -> None:
 
     if st.session_state.get("nav_page_request"):
         st.session_state["nav_page_selected"] = st.session_state.pop("nav_page_request")
-        st.session_state["nav_page_radio"] = st.session_state["nav_page_selected"]
     elif nav_target in {"Home", "Article", "Image", "Link", "Batch", "Performance", "Data", "History", "Settings"}:
         st.session_state["nav_page_selected"] = nav_target
-        st.session_state["nav_page_radio"] = nav_target
         try:
             st.query_params.clear()
         except Exception:
