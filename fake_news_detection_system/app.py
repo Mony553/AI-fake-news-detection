@@ -3998,9 +3998,35 @@ def _load_theme() -> None:
             cursor: pointer !important;
         }
 
+        /* Streamlit Cloud can render the native radio indicator differently
+           from local Streamlit. Hide that marker so the custom menu stays clean. */
+        section[data-testid="stSidebar"] div[role="radiogroup"] label input,
+        section[data-testid="stSidebar"] div[role="radiogroup"] label input[type="radio"],
+        section[data-testid="stSidebar"] div[role="radiogroup"] label > div:first-child,
+        section[data-testid="stSidebar"] div[role="radiogroup"] label > span:first-child,
+        section[data-testid="stSidebar"] div[role="radiogroup"] label [role="radio"],
+        section[data-testid="stSidebar"] div[role="radiogroup"] label [data-testid="stRadioIcon"] {
+            display: none !important;
+            visibility: hidden !important;
+            width: 0 !important;
+            min-width: 0 !important;
+            height: 0 !important;
+            min-height: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+
         section[data-testid="stSidebar"] div[role="radiogroup"] label:hover {
             background: #FFFFFF !important;
             border-color: #DCE4F0 !important;
+        }
+
+        section[data-testid="stSidebar"] div[role="radiogroup"] label > div:not(:first-child),
+        section[data-testid="stSidebar"] div[role="radiogroup"] label p {
+            grid-column: 2 !important;
+            min-width: 0 !important;
         }
 
         section[data-testid="stSidebar"] div[role="radiogroup"] label p {
