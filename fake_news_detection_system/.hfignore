@@ -1,0 +1,15 @@
+.DS_Store
+__pycache__/
+**/__pycache__/
+*.pyc
+
+# Keep the Space lightweight. Training data and local history are not needed
+# for the deployed review app.
+data/raw/
+data/processed/
+data/history/
+notebooks/
+training/
+
+# Keep generated local reports out of the Space.
+reports/

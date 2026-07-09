@@ -1,0 +1,22 @@
+.DS_Store
+__pycache__/
+**/__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Do not deploy large local datasets or generated history.
+data/
+fake_news_detection_system/data/raw/
+fake_news_detection_system/data/processed/
+fake_news_detection_system/data/history/
+
+# Keep training outputs/checkpoints out of the cloud app.
+fake_news_detection_system/models/transformer_fake_news/
+fake_news_detection_system/models/training_checkpoints/
+fake-news-detection/models/
+fake-news-detection/reports/
+
+# Keep the lightweight deployed baseline model.
+!fake_news_detection_system/models/baseline/
+!fake_news_detection_system/models/baseline/logistic_regression_model.pkl
