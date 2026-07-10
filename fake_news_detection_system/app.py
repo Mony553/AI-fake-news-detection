@@ -3941,9 +3941,11 @@ def _load_theme() -> None:
         .sidebar-brand {
             min-height: auto !important;
             margin-bottom: 0.8rem !important;
-            padding: 1.15rem !important;
+            padding: 1.25rem !important;
             border-radius: 14px !important;
-            background: #172033 !important;
+            background:
+                radial-gradient(circle at 88% 8%, rgba(59, 130, 246, 0.22), transparent 9rem),
+                linear-gradient(180deg, #172033 0%, #101827 100%) !important;
             color: #FFFFFF !important;
         }
 
@@ -3956,7 +3958,7 @@ def _load_theme() -> None:
 
         .sidebar-brand h2 {
             color: #FFFFFF !important;
-            font-size: 1.12rem !important;
+            font-size: 1.18rem !important;
             line-height: 1.2 !important;
             margin: 0 !important;
             white-space: normal !important;
@@ -4037,14 +4039,15 @@ def _load_theme() -> None:
         }
 
         section[data-testid="stSidebar"] div[data-testid="stButton"] {
-            margin: 0 0 0.38rem !important;
+            margin: 0 0 0.46rem !important;
         }
 
         section[data-testid="stSidebar"] div[data-testid="stButton"] button {
             justify-content: flex-start !important;
-            min-height: 3.25rem !important;
+            align-items: center !important;
+            min-height: 3.35rem !important;
             width: 100% !important;
-            padding: 0.62rem 0.95rem !important;
+            padding: 0.68rem 1rem !important;
             border-radius: 10px !important;
             border: 1px solid transparent !important;
             background: transparent !important;
@@ -4055,6 +4058,23 @@ def _load_theme() -> None:
             font-weight: 780 !important;
             line-height: 1.2 !important;
             text-align: left !important;
+        }
+
+        section[data-testid="stSidebar"] div[data-testid="stButton"] button div[data-testid="stMarkdownContainer"] {
+            width: 100% !important;
+        }
+
+        section[data-testid="stSidebar"] div[data-testid="stButton"] button p {
+            width: 100% !important;
+            margin: 0 !important;
+            color: inherit !important;
+            font-size: 0.98rem !important;
+            font-weight: 820 !important;
+            line-height: 1.2 !important;
+            text-align: left !important;
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
         }
 
         section[data-testid="stSidebar"] div[data-testid="stButton"] button:hover {
@@ -4068,6 +4088,10 @@ def _load_theme() -> None:
             border-color: #0B57D0 !important;
             color: #FFFFFF !important;
             box-shadow: 0 10px 20px rgba(11, 87, 208, 0.18) !important;
+        }
+
+        section[data-testid="stSidebar"] div[data-testid="stButton"] button[kind="primary"] p {
+            color: #FFFFFF !important;
         }
 
         section[data-testid="stSidebar"] div[role="radiogroup"] {
@@ -5433,9 +5457,9 @@ def _render_sidebar() -> str:
     st.sidebar.markdown(
         """
         <div class="sidebar-brand">
-            <h2>AI Fake News Detection</h2>
+            <h2>Credibility Review Center</h2>
             <p class="status-line"><span class="status-dot"></span>System Ready</p>
-            <p>FACT-CHECKING TEAM</p>
+            <p>NEWS VERIFICATION WORKSPACE</p>
         </div>
         """,
         unsafe_allow_html=True,
@@ -5463,15 +5487,15 @@ def _render_sidebar() -> str:
         "Settings": "Workspace Settings",
     }
     page_icons = {
-        "Home": "⌂",
-        "Article": "▤",
-        "Image": "▧",
-        "Link": "↗",
-        "Batch": "□",
-        "Performance": "⌁",
-        "Data": "◎",
-        "History": "◷",
-        "Settings": "⚙",
+        "Home": "🏠",
+        "Article": "📝",
+        "Image": "🖼️",
+        "Link": "🔗",
+        "Batch": "📂",
+        "Performance": "📊",
+        "Data": "🗄️",
+        "History": "🕘",
+        "Settings": "⚙️",
     }
     if st.session_state.get("nav_page_selected") not in pages:
         st.session_state["nav_page_selected"] = pages[0]
@@ -5503,7 +5527,7 @@ def _render_sidebar() -> str:
         f"""
         <div class="workspace-card">
             <span class="workspace-avatar">⌾</span>
-            <div><small>WORKSPACE</small><strong>Fact-Checking ...</strong></div>
+            <div><small>WORKSPACE</small><strong>News review desk</strong></div>
         </div>
         <div class="sidebar-ready-card">
             <span>Review System {status}</span>
