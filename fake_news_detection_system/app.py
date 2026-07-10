@@ -4059,17 +4059,33 @@ def _load_theme() -> None:
             text-align: left !important;
         }
 
-        section[data-testid="stSidebar"] div[data-testid="stButton"] button div[data-testid="stMarkdownContainer"] {
+        section[data-testid="stSidebar"] div[data-testid="stButton"] button > div,
+        section[data-testid="stSidebar"] div[data-testid="stButton"] button div[data-testid="stBaseButton-secondary"],
+        section[data-testid="stSidebar"] div[data-testid="stButton"] button div[data-testid="stBaseButton-primary"] {
             width: 100% !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: flex-start !important;
+            gap: 1.05rem !important;
+            text-align: left !important;
+        }
+
+        section[data-testid="stSidebar"] div[data-testid="stButton"] button div[data-testid="stMarkdownContainer"] {
+            width: auto !important;
+            min-width: 0 !important;
+            flex: 1 1 auto !important;
+            display: block !important;
+            text-align: left !important;
         }
 
         section[data-testid="stSidebar"] div[data-testid="stButton"] button [data-testid="stIconMaterial"],
         section[data-testid="stSidebar"] div[data-testid="stButton"] button svg {
             color: currentColor !important;
-            flex: 0 0 auto !important;
+            flex: 0 0 1.75rem !important;
             font-size: 1.42rem !important;
-            width: 1.42rem !important;
+            width: 1.75rem !important;
             height: 1.42rem !important;
+            text-align: center !important;
         }
 
         section[data-testid="stSidebar"] div[data-testid="stButton"] button p {
