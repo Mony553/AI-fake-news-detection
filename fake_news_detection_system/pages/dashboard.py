@@ -17,7 +17,7 @@ from utils.ui import DATASET_PATH, business_status_label, kpi_card, load_metrics
 def _format_metric(value) -> str:
     if isinstance(value, (int, float)):
         return f"{value * 100:.1f}%" if value <= 1 else f"{value:.1f}%"
-    return "Not available"
+    return "Awaiting report"
 
 
 def _metric_lookup(metrics: dict, key: str):
@@ -38,12 +38,14 @@ def render() -> None:
 
     metrics = metric_values(load_metrics())
     system_status = business_status_label()
-    dataset_size = "Not available"
+    reference_label = "Cloud demo"
+    reference_caption = "Training data is kept local to keep deployment fast"
     if DATASET_PATH.exists():
         try:
-            dataset_size = f"{sum(1 for _ in DATASET_PATH.open()) - 1:,} rows"
+            reference_label = f"{sum(1 for _ in DATASET_PATH.open()) - 1:,} rows"
+            reference_caption = "Examples used to prepare the system"
         except OSError:
-            dataset_size = "Not available"
+            reference_label = "Cloud demo"
 
     section_title("📈", "Review Quality Snapshot", "A plain-language view of how well the review system is performing.")
     cols = st.columns(4)
@@ -62,7 +64,7 @@ def render() -> None:
     with c1:
         kpi_card("brain", "System Status", system_status, "Ready to check content")
     with c2:
-        kpi_card("database", "Reference Examples", dataset_size, "Examples used to prepare the system")
+        kpi_card("database", "Reference Mode", reference_label, reference_caption)
     with c3:
         kpi_card("shield", "Review Outcomes", "Fake or Real", "Main result shown to users")
 

@@ -17,6 +17,10 @@ fake_news_detection_system/models/training_checkpoints/
 fake-news-detection/models/
 fake-news-detection/reports/
 
+# Keep small evaluation summary for the deployed dashboard.
+!fake_news_detection_system/reports/
+!fake_news_detection_system/reports/baseline_metrics.json
+
 # Keep the lightweight deployed baseline model.
 !fake_news_detection_system/models/baseline/
 !fake_news_detection_system/models/baseline/logistic_regression_model.pkl
