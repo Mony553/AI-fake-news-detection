@@ -3941,11 +3941,9 @@ def _load_theme() -> None:
         .sidebar-brand {
             min-height: auto !important;
             margin-bottom: 0.8rem !important;
-            padding: 1.25rem !important;
+            padding: 1.15rem !important;
             border-radius: 14px !important;
-            background:
-                radial-gradient(circle at 88% 8%, rgba(59, 130, 246, 0.22), transparent 9rem),
-                linear-gradient(180deg, #172033 0%, #101827 100%) !important;
+            background: #172033 !important;
             color: #FFFFFF !important;
         }
 
@@ -3958,7 +3956,7 @@ def _load_theme() -> None:
 
         .sidebar-brand h2 {
             color: #FFFFFF !important;
-            font-size: 1.18rem !important;
+            font-size: 1.12rem !important;
             line-height: 1.2 !important;
             margin: 0 !important;
             white-space: normal !important;
@@ -4053,6 +4051,7 @@ def _load_theme() -> None:
             background: transparent !important;
             color: #273142 !important;
             box-shadow: none !important;
+            gap: 1.05rem !important;
             font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
             font-size: 0.98rem !important;
             font-weight: 780 !important;
@@ -4062,6 +4061,15 @@ def _load_theme() -> None:
 
         section[data-testid="stSidebar"] div[data-testid="stButton"] button div[data-testid="stMarkdownContainer"] {
             width: 100% !important;
+        }
+
+        section[data-testid="stSidebar"] div[data-testid="stButton"] button [data-testid="stIconMaterial"],
+        section[data-testid="stSidebar"] div[data-testid="stButton"] button svg {
+            color: currentColor !important;
+            flex: 0 0 auto !important;
+            font-size: 1.42rem !important;
+            width: 1.42rem !important;
+            height: 1.42rem !important;
         }
 
         section[data-testid="stSidebar"] div[data-testid="stButton"] button p {
@@ -5457,9 +5465,9 @@ def _render_sidebar() -> str:
     st.sidebar.markdown(
         """
         <div class="sidebar-brand">
-            <h2>Credibility Review Center</h2>
+            <h2>AI Fake News Detection</h2>
             <p class="status-line"><span class="status-dot"></span>System Ready</p>
-            <p>NEWS VERIFICATION WORKSPACE</p>
+            <p>FACT-CHECKING TEAM</p>
         </div>
         """,
         unsafe_allow_html=True,
@@ -5487,26 +5495,26 @@ def _render_sidebar() -> str:
         "Settings": "Workspace Settings",
     }
     page_icons = {
-        "Home": "🏠",
-        "Article": "📝",
-        "Image": "🖼️",
-        "Link": "🔗",
-        "Batch": "📂",
-        "Performance": "📊",
-        "Data": "🗄️",
-        "History": "🕘",
-        "Settings": "⚙️",
+        "Home": ":material/home:",
+        "Article": ":material/article:",
+        "Image": ":material/image:",
+        "Link": ":material/link:",
+        "Batch": ":material/folder:",
+        "Performance": ":material/monitoring:",
+        "Data": ":material/database:",
+        "History": ":material/history:",
+        "Settings": ":material/settings:",
     }
     if st.session_state.get("nav_page_selected") not in pages:
         st.session_state["nav_page_selected"] = pages[0]
     selected = st.session_state["nav_page_selected"]
 
     def render_nav_button(page: str) -> None:
-        label = f"{page_icons[page]}  {page_labels.get(page, page)}"
         clicked = st.sidebar.button(
-            label,
+            page_labels.get(page, page),
             key=f"nav_btn_{page}",
             type="primary" if page == selected else "secondary",
+            icon=page_icons[page],
             use_container_width=True,
         )
         if clicked:
@@ -5527,7 +5535,7 @@ def _render_sidebar() -> str:
         f"""
         <div class="workspace-card">
             <span class="workspace-avatar">⌾</span>
-            <div><small>WORKSPACE</small><strong>News review desk</strong></div>
+            <div><small>WORKSPACE</small><strong>Fact-Checking ...</strong></div>
         </div>
         <div class="sidebar-ready-card">
             <span>Review System {status}</span>
