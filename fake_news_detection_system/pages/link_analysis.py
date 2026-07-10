@@ -90,9 +90,12 @@ def render() -> None:
         """
         <div class="link-page-shell">
             <div class="link-hero">
-                <span>Source link review</span>
-                <h1>Check one news link before sharing.</h1>
-                <p>Paste a source URL or social post link. This page focuses only on link evidence and source context.</p>
+                <div>
+                    <span>Source link review</span>
+                    <h1>Review a source link before sharing.</h1>
+                    <p>Paste a news article URL or social post link. The system checks the domain signal and source context.</p>
+                </div>
+                <div class="link-hero-badge">Link review ready</div>
             </div>
         </div>
         """,
@@ -104,9 +107,14 @@ def render() -> None:
         st.markdown(
             """
             <div class="link-input-panel">
-                <div class="link-input-icon">URL</div>
+                <div class="link-input-icon">↗</div>
                 <strong>Paste Link</strong>
-                <p>Use a news article URL, social post link, or source page link.</p>
+                <p>Use the original article or source URL when possible.</p>
+                <div class="link-input-meta">
+                    <span>News URL</span>
+                    <span>Social post</span>
+                    <span>Source page</span>
+                </div>
             </div>
             """,
             unsafe_allow_html=True,
@@ -126,7 +134,7 @@ def render() -> None:
                 <div class="link-status-card">
                     <div class="link-status-dot"></div>
                     <strong>Waiting for link</strong>
-                    <p>Paste one URL to begin link-only review.</p>
+                    <p>Paste one URL to begin source review.</p>
                     <ul>
                         <li>Use the original source link when possible.</li>
                         <li>Avoid shortened links if you can.</li>
@@ -189,8 +197,11 @@ def render() -> None:
     st.markdown(
         """
         <div class="link-note-card">
-            <strong>Link-only workflow</strong>
-            <p>This page focuses only on source URL review. Article text checking stays on the Article page.</p>
+            <div class="link-note-icon">↳</div>
+            <div>
+                <strong>Link-only workflow</strong>
+                <p>This page reviews the source URL and domain signal. Use Article Check when you want to review the full article text.</p>
+            </div>
         </div>
         """,
         unsafe_allow_html=True,
