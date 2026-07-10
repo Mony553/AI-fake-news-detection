@@ -4734,43 +4734,77 @@ def _load_theme() -> None:
         }
 
         .image-page-shell {
-            max-width: 1180px !important;
-            margin: 2.4rem auto 2rem !important;
+            max-width: 1320px !important;
+            margin: 0.75rem auto 1.55rem !important;
             padding: 0 0.2rem !important;
         }
 
         .image-hero {
-            text-align: center !important;
-            padding: 2.2rem 1rem 1.6rem !important;
+            display: grid !important;
+            grid-template-columns: minmax(0, 1fr) auto !important;
+            align-items: center !important;
+            gap: 1.25rem !important;
+            text-align: left !important;
+            padding: 1.35rem 1.45rem !important;
+            border: 1px solid #DCE6F4 !important;
+            border-radius: 22px !important;
+            background:
+                radial-gradient(circle at 90% 5%, rgba(191, 235, 216, 0.45), transparent 18rem),
+                linear-gradient(135deg, #FFFFFF 0%, #F7FAFF 100%) !important;
+            box-shadow: 0 16px 34px rgba(15, 23, 42, 0.06) !important;
         }
 
         .image-hero span {
             display: inline-block !important;
             color: #2563EB !important;
-            font-size: 0.76rem !important;
+            font-size: 0.72rem !important;
             font-weight: 950 !important;
-            letter-spacing: 0.22em !important;
+            letter-spacing: 0.16em !important;
             text-transform: uppercase !important;
-            margin-bottom: 1rem !important;
+            margin-bottom: 0.45rem !important;
         }
 
         .image-hero h1 {
-            max-width: 780px !important;
-            margin: 0 auto !important;
+            max-width: 820px !important;
+            margin: 0 !important;
             color: #111827 !important;
-            font-size: clamp(2.2rem, 4vw, 4.1rem) !important;
-            line-height: 1.04 !important;
+            font-size: clamp(1.85rem, 2.8vw, 3.25rem) !important;
+            line-height: 1.05 !important;
             font-weight: 950 !important;
             letter-spacing: 0 !important;
         }
 
         .image-hero p {
-            max-width: 620px !important;
-            margin: 1.05rem auto 0 !important;
+            max-width: 760px !important;
+            margin: 0.85rem 0 0 !important;
             color: #64748B !important;
-            font-size: 1.05rem !important;
-            line-height: 1.6 !important;
+            font-size: 1rem !important;
+            line-height: 1.55 !important;
             font-weight: 650 !important;
+        }
+
+        .image-hero-badge {
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 0.45rem !important;
+            min-height: 2.65rem !important;
+            padding: 0 1rem !important;
+            border-radius: 999px !important;
+            border: 1px solid #BFEBD8 !important;
+            background: #ECFDF5 !important;
+            color: #047857 !important;
+            font-size: 0.86rem !important;
+            font-weight: 900 !important;
+            white-space: nowrap !important;
+        }
+
+        .image-hero-badge::before {
+            content: "";
+            width: 0.55rem !important;
+            height: 0.55rem !important;
+            border-radius: 999px !important;
+            background: #10B981 !important;
+            box-shadow: 0 0 0 6px rgba(16, 185, 129, 0.12) !important;
         }
 
         .image-upload-panel,
@@ -4783,7 +4817,7 @@ def _load_theme() -> None:
         }
 
         .image-upload-panel {
-            min-height: 260px !important;
+            min-height: 285px !important;
             display: flex !important;
             flex-direction: column !important;
             align-items: center !important;
@@ -4792,19 +4826,20 @@ def _load_theme() -> None:
             padding: 2rem !important;
             margin-bottom: 1rem !important;
             background:
-                linear-gradient(135deg, rgba(37, 99, 235, 0.06), rgba(16, 185, 129, 0.06)),
+                radial-gradient(circle at 86% 8%, rgba(37, 99, 235, 0.10), transparent 16rem),
+                linear-gradient(135deg, rgba(37, 99, 235, 0.055), rgba(16, 185, 129, 0.055)),
                 #FFFFFF !important;
         }
 
         .image-upload-icon {
-            width: 4.25rem !important;
-            height: 4.25rem !important;
+            width: 4.75rem !important;
+            height: 4.75rem !important;
             display: grid !important;
             place-items: center !important;
             border-radius: 20px !important;
             background: #EAF1FF !important;
             color: #2563EB !important;
-            font-size: 1rem !important;
+            font-size: 2rem !important;
             font-weight: 950 !important;
             margin-bottom: 1rem !important;
         }
@@ -4826,6 +4861,26 @@ def _load_theme() -> None:
             color: #64748B !important;
             line-height: 1.55 !important;
             font-weight: 650 !important;
+        }
+
+        .image-upload-meta {
+            display: flex !important;
+            gap: 0.55rem !important;
+            flex-wrap: wrap !important;
+            justify-content: center !important;
+            margin-top: 1rem !important;
+        }
+
+        .image-upload-meta span {
+            display: inline-flex !important;
+            align-items: center !important;
+            min-height: 2rem !important;
+            padding: 0 0.72rem !important;
+            border-radius: 999px !important;
+            background: #F1F5F9 !important;
+            color: #475569 !important;
+            font-size: 0.82rem !important;
+            font-weight: 850 !important;
         }
 
         div[data-testid="stFileUploader"] {
@@ -4859,8 +4914,8 @@ def _load_theme() -> None:
         }
 
         .image-status-card {
-            min-height: 260px !important;
-            padding: 1.45rem !important;
+            min-height: 285px !important;
+            padding: 1.6rem !important;
         }
 
         .image-status-card.ready {
@@ -4883,10 +4938,28 @@ def _load_theme() -> None:
 
         .image-status-card ul {
             margin: 1rem 0 0 !important;
-            padding-left: 1.2rem !important;
+            padding-left: 0 !important;
             color: #475569 !important;
             font-weight: 650 !important;
             line-height: 1.7 !important;
+            list-style: none !important;
+        }
+
+        .image-status-card li {
+            position: relative !important;
+            padding-left: 1.45rem !important;
+            margin: 0.45rem 0 !important;
+        }
+
+        .image-status-card li::before {
+            content: "";
+            position: absolute !important;
+            left: 0 !important;
+            top: 0.72rem !important;
+            width: 0.42rem !important;
+            height: 0.42rem !important;
+            border-radius: 999px !important;
+            background: #2563EB !important;
         }
 
         .image-file-grid {
@@ -4911,9 +4984,24 @@ def _load_theme() -> None:
         }
 
         .image-note-card {
-            max-width: 1180px !important;
-            margin: 2rem auto 2rem !important;
-            padding: 1.2rem 1.4rem !important;
+            max-width: 1320px !important;
+            margin: 1.6rem auto 2rem !important;
+            padding: 1.2rem 1.35rem !important;
+            display: grid !important;
+            grid-template-columns: auto minmax(0, 1fr) !important;
+            gap: 0.9rem !important;
+            align-items: center !important;
+        }
+
+        .image-note-icon {
+            width: 2.75rem !important;
+            height: 2.75rem !important;
+            display: grid !important;
+            place-items: center !important;
+            border-radius: 14px !important;
+            background: #EEF4FF !important;
+            color: #2563EB !important;
+            font-size: 1.45rem !important;
         }
 
         .text-from-image-card {

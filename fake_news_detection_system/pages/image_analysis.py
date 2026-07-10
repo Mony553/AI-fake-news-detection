@@ -354,9 +354,12 @@ def render() -> None:
         """
         <div class="image-page-shell">
             <div class="image-hero">
-                <span>Image evidence review</span>
-                <h1>Upload a news screenshot for review.</h1>
-                <p>Use this page only for screenshots, social media images, and visual evidence that your team wants to inspect.</p>
+                <div>
+                    <span>Image evidence review</span>
+                    <h1>Review text inside a screenshot.</h1>
+                    <p>Upload one news screenshot or social media image. The system extracts visible text and checks it for credibility risk.</p>
+                </div>
+                <div class="image-hero-badge">OCR and review ready</div>
             </div>
         </div>
         """,
@@ -368,9 +371,14 @@ def render() -> None:
         st.markdown(
             """
             <div class="image-upload-panel">
-                <div class="image-upload-icon">IMG</div>
+                <div class="image-upload-icon">▧</div>
                 <strong>Upload Image</strong>
-                <p>PNG, JPG, or JPEG screenshot evidence only.</p>
+                <p>Use a clear PNG, JPG, or JPEG screenshot with readable text.</p>
+                <div class="image-upload-meta">
+                    <span>Screenshot</span>
+                    <span>Social post</span>
+                    <span>News image</span>
+                </div>
             </div>
             """,
             unsafe_allow_html=True,
@@ -396,11 +404,11 @@ def render() -> None:
                 <div class="image-status-card">
                     <div class="image-status-dot"></div>
                     <strong>Waiting for image</strong>
-                    <p>Upload one screenshot or news image to begin the image review workflow.</p>
+                    <p>Upload one item to start the image review workflow.</p>
                     <ul>
-                        <li>Use clear, readable screenshots.</li>
+                        <li>Make sure the article text is visible.</li>
                         <li>Crop unrelated background if possible.</li>
-                        <li>Upload one item at a time.</li>
+                        <li>Use one image per review.</li>
                     </ul>
                 </div>
                 """,
@@ -448,8 +456,11 @@ def render() -> None:
     st.markdown(
         """
         <div class="image-note-card">
-            <strong>Image-only workflow</strong>
-            <p>Upload a screenshot, then run review. The system reads visible text from the image and checks it with the local classifier.</p>
+            <div class="image-note-icon">↳</div>
+            <div>
+                <strong>One-step image workflow</strong>
+                <p>Upload a screenshot, then run review. The system reads visible text from the image and checks it with the deployed classifier.</p>
+            </div>
         </div>
         """,
         unsafe_allow_html=True,
